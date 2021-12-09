@@ -4,10 +4,8 @@ public class Problem {
 	
 	String name;
 	String type;
-	String comment;
 	int dimension;
 	double[][] distanceMatrix;
-	double distance;
 	Solution solution = new Solution();
 	
 	public Problem() {
@@ -30,14 +28,6 @@ public class Problem {
 		this.type = type;
 	}
 
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
 	public int getDimension() {
 		return dimension;
 	}
@@ -54,11 +44,29 @@ public class Problem {
 		this.distanceMatrix = distanceMatrix;
 	}
 
-	public double getDistance() {
-		return distance;
+	public double getTotalDistance() {
+        double totalDistance = 0;
+        for (int i = 0; i < this.solution.getTour().size() - 1; i++) {
+            totalDistance += distanceMatrix[this.solution.getTour().get(i)][this.solution.getTour().get(i+1)];
+        }
+        return totalDistance;
+    }
+
+	public void printDistanceMatrix() {
+		for (int i = 0; i < this.dimension; i++) {
+			for (int j = 0; j < this.dimension; j++) {
+				System.out.print(this.distanceMatrix[i][j] + " ");
+			}
+			System.out.print("\n");
+		}
+	}
+	
+	public Solution getSolution() {
+		return this.solution;
+	}
+	
+	public void setSolution(Solution solution) {
+		this.solution = solution;
 	}
 
-	public void setDistance(double distance) {
-		this.distance = distance;
-	}
 }

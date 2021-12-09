@@ -3,35 +3,39 @@ package algorithms;
 import java.util.ArrayList;
 
 import dataStructure.Solution;
+import dataStructure.Problem;
 
 public class Greedy extends Algorithm {
-    public Greedy(Solution Solution, long TimeLimit) {
-        super(Solution, TimeLimit);
+    public Greedy(Problem problem, long timeLimit) {
+        super(problem, timeLimit);
     }
 
-    public int FindNextVertice(int CurrentVertice, ArrayList<Integer> CandidateVerticeList) {
-        double MinDistance = Double.POSITIVE_INFINITY;
-        int NextVertice = -1;
-        for (int Vertice : CandidateVerticeList) {
-            if (this.Solution.getDistanceMatrix()[CurrentVertice][Vertice] < MinDistance) {
-                MinDistance = this.Solution.getDistanceMatrix()[CurrentVertice][Vertice];
-                NextVertice = Vertice;
+    public int FindNextVertice(int currentVertice, ArrayList<Integer> candidateVerticeList) {
+        double minDistance = Double.POSITIVE_INFINITY;
+        int nextVertice = -1;
+        for (int vertice : candidateVerticeList) {
+            if (this.problem.getDistanceMatrix()[currentVertice][vertice] < minDistance) {
+                minDistance = this.problem.getDistanceMatrix()[currentVertice][vertice];
+                nextVertice = vertice;
             }
         }
-        return NextVertice;
+        return nextVertice;
     }
     
     @Override
     public Solution solve() {
-        this.Solution.setTour(new ArrayList<Integer>());
-        ArrayList<Integer> CandidateVerticeList = new ArrayList<Integer>();
+        Solution solution = new Solution();
+        ArrayList<Integer> candidateVerticeList = new ArrayList<Integer>();
+        for (int i = 0; i < problem.getDimension(); i++) {
+            candidateVerticeList.add(i);
+        }
         int CurrentVertice = 0;
-        while (CandidateVerticeList.size() > 0) {
-            int NextVertice = FindNextVertice(CurrentVertice, CandidateVerticeList);
-            this.Solution.getTour().add(NextVertice);
-            CandidateVerticeList.remove(CandidateVerticeList.indexOf(NextVertice));
+        while (candidateVerticeList.size() > 0) {
+            int NextVertice = FindNextVertice(CurrentVertice, candidateVerticeList);
+            solution.getTour().add(NextVertice);
+            candidateVerticeList.remove(candidateVerticeList.indexOf(NextVertice));
             CurrentVertice = NextVertice;
         }
-        return this.Solution;
+        return solution;
     }
 }

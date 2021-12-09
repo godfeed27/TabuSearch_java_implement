@@ -1,14 +1,16 @@
 package algorithms;
 
+import dataStructure.Problem;
 import dataStructure.Solution;
 
 public class Tabu extends Algorithm {
-    public Tabu(Solution Solution, long TimeLimit) {
-        super(Solution, TimeLimit);
+    public Tabu(Problem problem, long timeLimit) {
+        super(problem, timeLimit);
     }
 
     @Override
     public Solution solve() {
-        return this.Solution;
+        Solution solution = new Solution();
+        return solution;
     }
 }

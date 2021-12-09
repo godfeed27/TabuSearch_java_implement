@@ -3,15 +3,13 @@ package dataStructure;
 import java.util.ArrayList;
 
 public class Solution {
-    double[][] DistanceMatrix;
-    ArrayList<Integer> tour;
+    ArrayList<Integer> tour = new ArrayList<Integer>();
 
     public Solution() {
 
     }
 
-    public Solution(double[][] DistanceMatrix, ArrayList<Integer> tour) {
-        this.setDistanceMatrix(DistanceMatrix);
+    public Solution(ArrayList<Integer> tour) {
         this.setTour(tour);
     }
 
@@ -21,13 +19,5 @@ public class Solution {
 
     public void setTour(ArrayList<Integer> tour) {
         this.tour = tour;
-    }
-
-    public double[][] getDistanceMatrix() {
-        return DistanceMatrix;
-    }
-
-    public void setDistanceMatrix(double[][] distanceMatrix) {
-        this.DistanceMatrix = distanceMatrix;
     }
 }
