@@ -45,6 +45,7 @@ public class Input {
 			}
 			currentLine = fileScanner.nextLine();
 		}
+		fileScanner.close();
 		
 		// Set Distance matrix
 		problem.setDistanceMatrix(new double[problem.getDimension()][problem.getDimension()]);

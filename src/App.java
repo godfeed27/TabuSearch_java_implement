@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 import IO.Input;
 import algorithms.Greedy;
 import algorithms.Tabu;
@@ -10,8 +14,9 @@ public class App {
         input.setProblem(problem);
         Greedy greedy = new Greedy(problem, 600);
         problem.setSolution(greedy.solve());
-        // Tabu tabu = new Tabu(problem, 600);
+        Tabu tabu = new Tabu(problem, 600, 3, 0.3);
         // problem.setSolution(tabu.solve());
-        System.out.println(problem.getTotalDistance());
+        // System.out.println(problem.getSolution().getTour());
+        // System.out.println(problem.getTotalDistance());
     }
 }
