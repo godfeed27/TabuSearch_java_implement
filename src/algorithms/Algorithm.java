@@ -5,11 +5,11 @@ import dataStructure.Solution;
 
 public class Algorithm {
     Problem problem;
-    long TimeLimit;
+    public double timeLimit = 600.0;
 
-    public Algorithm(Problem problem, long TimeLimit) {
+    public Algorithm(Problem problem, double TimeLimit) {
         this.problem = problem;
-        this.TimeLimit = TimeLimit;
+        this.timeLimit = timeLimit*1000;
     }
 
     public Solution solve() {

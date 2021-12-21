@@ -44,14 +44,6 @@ public class Problem {
 		this.distanceMatrix = distanceMatrix;
 	}
 
-	public double getTotalDistance() {
-        double totalDistance = 0;
-        for (int i = 0; i < this.solution.getTour().size() - 1; i++) {
-            totalDistance += distanceMatrix[this.solution.getTour().get(i)][this.solution.getTour().get(i+1)];
-        }
-        return totalDistance;
-    }
-
 	public void printDistanceMatrix() {
 		for (int i = 0; i < this.dimension; i++) {
 			for (int j = 0; j < this.dimension; j++) {
