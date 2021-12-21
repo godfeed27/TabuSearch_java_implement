@@ -39,12 +39,13 @@ public class Output {
         outFile.getParentFile().mkdirs();
         FileWriter fileWriter = new FileWriter(outFile);
         System.out.println("Writer file: " + outFile.getAbsolutePath());
-        fileWriter.write("NAME: " + problem.getName() + "\n" + "TYPE: " + problem.getType() + "\n" + "DIMENSION: ");
+        fileWriter.write("NAME: " + problem.getName() + "\nCOMMENT: " + problem.getComment() + "\nDIMENSION: ");
         fileWriter.write(String.valueOf(problem.getDimension()));
-        fileWriter.write("\nDISTANCE: " + String.valueOf(problem.getSolution().getTotalDistance(problem)) + "\nTOUR_SOLUTION: " + "\n");
+        fileWriter.write("\nDISTANCE: " + String.valueOf(problem.getSolution().getTotalDistance(problem)) + "\nEXECUTION_TIME: " + problem.getExecutionTime() + "\nTOUR_SOLUTION: " + "\n");
         for (int i = 0; i < problem.getSolution().getTour().size(); i++) {
         	fileWriter.write(String.valueOf(problem.getSolution().getTour().get(i) + 1) + " ");
         }
+        fileWriter.write("\n");
         fileWriter.write("EOF");
         System.out.println("Successfull!");
         fileWriter.close();

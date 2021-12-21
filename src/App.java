@@ -14,7 +14,7 @@ public class App {
         problem.setSolution(greedy.solve());
         System.out.println(problem.getSolution().getTotalDistance(problem));
 
-        Tabu tabu = new Tabu(problem, 1.0, 3, 0.3);
+        Tabu tabu = new Tabu(problem, 600.0, 3, 0.3);
         problem.setSolution(tabu.solve());
         // System.out.println(problem.getSolution().getTour());
         System.out.println(problem.getSolution().getTotalDistance(problem));

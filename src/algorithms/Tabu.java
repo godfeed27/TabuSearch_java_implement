@@ -147,6 +147,8 @@ public class Tabu extends Algorithm {
 
     @Override
     public Solution solve() {
+        problem.setComment("Tabu Search - tabusSize: " + this.tabusSize + " - neighborSize: " + this.neighborSize);
+
         double timeStart = System.currentTimeMillis();
 
         Solution currentSolution = new Solution();
@@ -196,8 +198,8 @@ public class Tabu extends Algorithm {
 
             System.out.println("current");
             System.out.println(currentSolution.getTotalDistance(problem));
-            // System.out.println("best");
-            // System.out.println(bestSolution.getTotalDistance(problem));
+            System.out.println("best");
+            System.out.println(bestSolution.getTotalDistance(problem));
 
             double timeCheck = System.currentTimeMillis();
             if (timeCheck - timeStart >= 0.75*this.timeLimit) {
@@ -215,8 +217,10 @@ public class Tabu extends Algorithm {
             }
         }
 
+        System.out.println(goodSolutionList.size());
+
         double timeOut = System.currentTimeMillis();
-        System.out.println((timeOut - timeStart)/1000);
+        problem.setExecutionTime((timeOut - timeStart)/1000);;
         return bestSolution;
     }
 }
