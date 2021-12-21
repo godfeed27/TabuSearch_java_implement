@@ -38,7 +38,7 @@ public class Vertice {
 	}
 	
 	public double getDistance(Vertice A) {
-		return Math.sqrt(Math.pow(x - A.getX(), 2) + Math.pow((y - A.getY()), 2));
+		return Math.round(Math.sqrt(Math.pow(x - A.getX(), 2) + Math.pow((y - A.getY()), 2)));
 	}
 
 	@Override

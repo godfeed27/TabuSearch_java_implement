@@ -23,7 +23,7 @@ public class Output {
         System.out.println("Writer file: " + outFile.getAbsolutePath());
         for (int i = 0; i < problem.getDistanceMatrix().length; i++) {
         	for (int j = 0; j < problem.getDistanceMatrix()[0].length; j++) {
-        		fileWriter.write(String.valueOf(problem.getDistanceMatrix()[i][j]) + "\t");
+        		fileWriter.write(String.valueOf(problem.getDistanceMatrix()[i][j]) + " ");
         	}
         	fileWriter.write("\n");
         }

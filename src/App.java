@@ -9,14 +9,17 @@ public class App {
         Input input = new Input("D:/TabuSearch_java_implement/src/data/a280.tsp");
         Problem problem = new Problem();
         input.setProblem(problem);
+
         Greedy greedy = new Greedy(problem, 600);
         problem.setSolution(greedy.solve());
         System.out.println(problem.getSolution().getTotalDistance(problem));
-        Tabu tabu = new Tabu(problem, 600.0, 3, 0.3);
+
+        Tabu tabu = new Tabu(problem, 1.0, 3, 0.3);
         problem.setSolution(tabu.solve());
         // System.out.println(problem.getSolution().getTour());
         System.out.println(problem.getSolution().getTotalDistance(problem));
         Output output = new Output(problem);
+        // output.saveDistanceMatrix("D:/TabuSearch_java_implement/output");
         output.writeSolution("D:/TabuSearch_java_implement/output");
     }
 }

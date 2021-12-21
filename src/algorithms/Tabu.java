@@ -22,28 +22,15 @@ public class Tabu extends Algorithm {
         this.tabus = tabus;
     }
 
-    public int[][] createNeighborList() {
-        int[][] neighborList = new int[this.problem.getDimension() * this.neighborSize][2];
+    public ArrayList<int[]> createNeighborList() {
+        ArrayList<int[]> neighborList = new ArrayList<int[]>();
         for (int i = 0; i < this.problem.getDimension() * this.neighborSize; i++) {
+            neighborList.add(new int[2]);
             for (int j = 0; j < 2; j++) {
-                neighborList[i][j] = rand.nextInt(this.problem.getDimension());
+                neighborList.get(i)[j] = rand.nextInt(this.problem.getDimension());
             }
         }
         return neighborList;
-    }
-
-    public void swap(int[] o1, int[] o2){
-        int[] temp = o1.clone();
-        o1 = o2.clone();
-        o2 = temp.clone();
-    }
-
-    public void neighborSort(int[][] neighborList, Solution currentSolution) {
-        for (int i = 0; i < neighborList.length - 1; i++) {
-            if (this.distanceVariesTwoOpt(neighborList[i], currentSolution) < this.distanceVariesTwoOpt(neighborList[i+1], currentSolution)) {
-                this.swap(neighborList[i], neighborList[i+1]);
-            }
-        }
     }
 
     public double distanceVariesTwoOpt(int[] neighbor, Solution solution) {
@@ -74,14 +61,28 @@ public class Tabu extends Algorithm {
             previousVertice = solution.getTour().get(minIdx - 1);
         }
 
-        totalDistanceBefore += this.problem.getDistanceMatrix()[previousVertice][minVertice];
-        totalDistanceBefore += this.problem.getDistanceMatrix()[nextVertice][maxVertice];
-        totalDistanceAfter += this.problem.getDistanceMatrix()[previousVertice][maxVertice];
-        totalDistanceAfter += this.problem.getDistanceMatrix()[nextVertice][minVertice];
+        totalDistanceBefore = this.problem.getDistanceMatrix()[previousVertice][minVertice] + this.problem.getDistanceMatrix()[nextVertice][maxVertice];
+        totalDistanceAfter = this.problem.getDistanceMatrix()[previousVertice][maxVertice] + this.problem.getDistanceMatrix()[nextVertice][minVertice];
 
         totalChange = totalDistanceBefore - totalDistanceAfter;
 
         return totalChange;
+    }
+
+    public void swapNeighbor(ArrayList<int[]> neighborList, int neighbor1, int neighbor2) {
+        int[] temp = neighborList.get(neighbor1).clone();
+        neighborList.set(neighbor1, neighborList.get(neighbor2).clone());
+        neighborList.set(neighbor2, temp);
+    }
+
+    public void neighborListSort(ArrayList<int[]> neighborList, Solution solution) {
+        for (int i = 0; i < neighborList.size()-1; i++) {
+            for (int j = i+1; j < neighborList.size(); j++) {
+                if (this.distanceVariesTwoOpt(neighborList.get(i), solution) < this.distanceVariesTwoOpt(neighborList.get(j), solution)) {
+                    this.swapNeighbor(neighborList, i, j);
+                }
+            }
+        }
     }
 
     public Solution swapTwoEdges(int[] neighbor, Solution solution) {
@@ -129,7 +130,7 @@ public class Tabu extends Algorithm {
         Solution newSolution = solution;
         double timeStart = System.currentTimeMillis();
         while (true) {
-            int[][] neighborList = this.createNeighborList();
+            ArrayList<int[]> neighborList = this.createNeighborList();
             for (int[] neighbor : neighborList) {
                 if (this.distanceVariesTwoOpt(neighbor, newSolution) > 0) {
                     newSolution = this.swapTwoEdges(neighbor, newSolution);
@@ -157,11 +158,18 @@ public class Tabu extends Algorithm {
         ArrayList<Solution> goodSolutionList = new ArrayList<>();
         
         while (true) {
-            int[][] neighborList = this.createNeighborList();
-            this.neighborSort(neighborList, currentSolution);
-            for (int i = 0; i < neighborList.length; i++) {
-                neighbor = neighborList[i];
+            ArrayList<int[]> neighborList = this.createNeighborList();
+
+            // neighborList.sort((neighbor1, neighbor2) -> {return (int) this.distanceVariesTwoOpt(neighbor1, currentSolution) - (int) this.distanceVariesTwoOpt(neighbor2, currentSolution);});
+            this.neighborListSort(neighborList, currentSolution);
+
+            for (int i = 0; i < neighborList.size(); i++) {
+                neighbor = neighborList.get(i);
                 distanceVariesChange = this.distanceVariesTwoOpt(neighbor, currentSolution);
+                System.out.println("change");
+                System.out.println(distanceVariesChange);
+                System.out.println("old current");
+                System.out.println(currentSolution.getTotalDistance(problem));
                 if (distanceVariesChange >= 0) {
                     currentSolution = this.swapTwoEdges(neighbor, currentSolution);
                     if (currentSolution.getTotalDistance(this.problem) <= bestSolution.getTotalDistance(this.problem)) {
@@ -185,14 +193,16 @@ public class Tabu extends Algorithm {
             if (!goodSolutionList.contains(bestSolution)) {
                 goodSolutionList.add(bestSolution);
             }
+
+            System.out.println("current");
+            System.out.println(currentSolution.getTotalDistance(problem));
+            // System.out.println("best");
+            // System.out.println(bestSolution.getTotalDistance(problem));
+
             double timeCheck = System.currentTimeMillis();
             if (timeCheck - timeStart >= 0.75*this.timeLimit) {
                 break;
             }
-            // System.out.println("current");
-            // System.out.println(currentSolution.getTotalDistance(problem));
-            // System.out.println("best");
-            // System.out.println(bestSolution.getTotalDistance(problem));
         }
 
         for (int i = 0; i < goodSolutionList.size(); i++) {
