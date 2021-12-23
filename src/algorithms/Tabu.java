@@ -15,8 +15,8 @@ public class Tabu extends Algorithm {
 
     Random rand = new Random();
 
-    public Tabu(Problem problem, double timeLimit, int neighborSize, double tabusSize) {
-        super(problem, timeLimit);
+    public Tabu(Problem problem, double timeLimit, Solution solution, int neighborSize, double tabusSize) {
+        super(problem, timeLimit, solution);
         this.neighborSize = neighborSize;
         this.tabusSize = tabusSize;
         this.tabus = tabus;
@@ -153,8 +153,14 @@ public class Tabu extends Algorithm {
 
         Solution currentSolution = new Solution();
         Solution bestSolution = new Solution();
-        currentSolution = this.problem.getSolution().copy();
-        bestSolution = this.problem.getSolution().copy();
+        currentSolution = this.solution.copy();
+        bestSolution = this.solution.copy();
+
+        System.out.println("current");
+        System.out.println(currentSolution.getTotalDistance(problem));
+        System.out.println("best");
+        System.out.println(bestSolution.getTotalDistance(problem));
+
         int[] neighbor = new int[2];
         double distanceVariesChange = 0;
         ArrayList<Solution> goodSolutionList = new ArrayList<>();
@@ -168,10 +174,12 @@ public class Tabu extends Algorithm {
             for (int i = 0; i < neighborList.size(); i++) {
                 neighbor = neighborList.get(i);
                 distanceVariesChange = this.distanceVariesTwoOpt(neighbor, currentSolution);
-                System.out.println("change");
-                System.out.println(distanceVariesChange);
-                System.out.println("old current");
-                System.out.println(currentSolution.getTotalDistance(problem));
+
+                // System.out.println("change");
+                // System.out.println(distanceVariesChange);
+                // System.out.println("old current");
+                // System.out.println(currentSolution.getTotalDistance(problem));
+                
                 if (distanceVariesChange >= 0) {
                     currentSolution = this.swapTwoEdges(neighbor, currentSolution);
                     if (currentSolution.getTotalDistance(this.problem) <= bestSolution.getTotalDistance(this.problem)) {
@@ -196,10 +204,10 @@ public class Tabu extends Algorithm {
                 goodSolutionList.add(bestSolution);
             }
 
-            System.out.println("current");
-            System.out.println(currentSolution.getTotalDistance(problem));
-            System.out.println("best");
-            System.out.println(bestSolution.getTotalDistance(problem));
+            // System.out.println("current");
+            // System.out.println(currentSolution.getTotalDistance(problem));
+            // System.out.println("best");
+            // System.out.println(bestSolution.getTotalDistance(problem));
 
             double timeCheck = System.currentTimeMillis();
             if (timeCheck - timeStart >= 0.75*this.timeLimit) {
@@ -217,10 +225,11 @@ public class Tabu extends Algorithm {
             }
         }
 
-        System.out.println(goodSolutionList.size());
+        // System.out.println(goodSolutionList.size());
 
         double timeOut = System.currentTimeMillis();
-        problem.setExecutionTime((timeOut - timeStart)/1000);;
-        return bestSolution;
+        this.setExecutionTime((timeOut - timeStart)/1000);;
+        this.solution = bestSolution;
+        return this.solution;
     }
 }

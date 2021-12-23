@@ -6,8 +6,8 @@ import dataStructure.Solution;
 import dataStructure.Problem;
 
 public class Greedy extends Algorithm {
-    public Greedy(Problem problem, long timeLimit) {
-        super(problem, timeLimit);
+    public Greedy(Problem problem, double timeLimit, Solution solution) {
+        super(problem, timeLimit, solution);
     }
 
     public int FindNextVertice(int currentVertice, ArrayList<Integer> candidateVerticeList) {
@@ -24,7 +24,9 @@ public class Greedy extends Algorithm {
     
     @Override
     public Solution solve() {
-        Solution solution = new Solution();
+
+        double timeStart = System.currentTimeMillis();
+
         ArrayList<Integer> candidateVerticeList = new ArrayList<Integer>();
         for (int i = 0; i < problem.getDimension(); i++) {
             candidateVerticeList.add(i);
@@ -32,10 +34,14 @@ public class Greedy extends Algorithm {
         int CurrentVertice = 0;
         while (candidateVerticeList.size() > 0) {
             int NextVertice = FindNextVertice(CurrentVertice, candidateVerticeList);
-            solution.getTour().add(NextVertice);
+            this.solution.getTour().add(NextVertice);
             candidateVerticeList.remove(candidateVerticeList.indexOf(NextVertice));
             CurrentVertice = NextVertice;
         }
-        return solution;
+
+        double timeOut = System.currentTimeMillis();
+        this.setExecutionTime((timeOut - timeStart)/1000);;
+
+        return this.solution;
     }
 }

@@ -26,6 +26,7 @@ public class Solution {
         for (int i = 0; i < this.getTour().size() - 1; i++) {
             totalDistance += problem.getDistanceMatrix()[this.getTour().get(i)][this.getTour().get(i+1)];
         }
+        totalDistance += problem.getDistanceMatrix()[this.getTour().get(this.getTour().size() - 1)][this.getTour().get(0)];
         return totalDistance;
     }
 

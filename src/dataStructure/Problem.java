@@ -6,9 +6,7 @@ public class Problem {
 	String type;
 	String comment;
 	int dimension;
-	double executionTime;
 	double[][] distanceMatrix;
-	Solution solution = new Solution();
 	
 	public Problem() {
 		
@@ -55,28 +53,12 @@ public class Problem {
 		}
 	}
 	
-	public Solution getSolution() {
-		return this.solution;
-	}
-	
-	public void setSolution(Solution solution) {
-		this.solution = solution;
-	}
-
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
 
 	public String getComment() {
 		return this.comment;
-	}
-
-	public void setExecutionTime(double executionTime) {
-		this.executionTime = executionTime;
-	}
-
-	public double getExecutionTime() {
-		return this.executionTime;
 	}
 
 }
