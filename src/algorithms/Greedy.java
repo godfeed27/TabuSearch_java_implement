@@ -8,6 +8,7 @@ import dataStructure.Problem;
 public class Greedy extends Algorithm {
     public Greedy(Problem problem, double timeLimit, Solution solution) {
         super(problem, timeLimit, solution);
+        this.name = "greedy";
     }
 
     public int FindNextVertice(int currentVertice, ArrayList<Integer> candidateVerticeList) {

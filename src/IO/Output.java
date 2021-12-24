@@ -36,7 +36,7 @@ public class Output {
 	
 	
 	public void writeSolution(Problem problem, Algorithm algorithm) throws IOException{
-		String outFileName = folderPath + problem.getName() + ".tabu.tour";
+		String outFileName = folderPath + problem.getName() + "." + algorithm.getName() + ".tour";
 		File outFile = new File(outFileName);
         outFile.getParentFile().mkdirs();
         FileWriter fileWriter = new FileWriter(outFile);

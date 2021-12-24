@@ -17,6 +17,7 @@ public class Tabu extends Algorithm {
 
     public Tabu(Problem problem, double timeLimit, Solution solution, int neighborSize, double tabusSize) {
         super(problem, timeLimit, solution);
+        this.name = "tabu";
         this.neighborSize = neighborSize;
         this.tabusSize = tabusSize;
         this.tabus = tabus;

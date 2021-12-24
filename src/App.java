@@ -7,11 +7,11 @@ import dataStructure.Solution;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        String[] problemList = {"a280.tsp", "berlin52.tsp", "bier127.tsp", "d1291.tsp", "eil101.tsp", "fl1400.tsp", "pcb3038.tsp", "pr2392.tsp", "rl1889.tsp", "u1060.tsp"};
+        String[] problemList = {"a280.tsp", "eil51.tsp", "bier127.tsp", "d1291.tsp", "eil101.tsp", "fl1400.tsp", "pcb3038.tsp", "pr2392.tsp", "rl1889.tsp", "u1060.tsp"};
         for (String problemName : problemList) {
             System.out.println("Solving " + problemName);
 
-            Input input = new Input("/Users/anhquang/Documents/TabuSearch_java_implement/data/" + problemName);
+            Input input = new Input("D:/TabuSearch_java_implement/data/" + problemName);
             Problem problem = new Problem();
             input.setProblem(problem);
 
@@ -27,7 +27,7 @@ public class App {
             System.out.println("\nTabu");
             System.out.println(newSolution.getTotalDistance(problem));
 
-            Output output = new Output("/Users/anhquang/Documents/TabuSearch_java_implement/output/");
+            Output output = new Output("D:/TabuSearch_java_implement/output/");
             output.writeSolution(problem, tabu);
         }
     }
