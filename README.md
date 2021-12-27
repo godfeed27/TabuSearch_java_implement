@@ -43,6 +43,25 @@ One can download the datasets `.tsp`, `.opt.tsp` from [here](http://comopt.ifi.u
         > bash getData-Unix.sh
         ```
 
-## Installation
+## Run Program
 
-### 
+### Installation
+- Install [Java Development Kit](https://www.oracle.com/java/technologies/downloads/) and set path:
+    ```
+    set path="path\to\Java\";%path%
+    ```
+
+### Choose Problem to solve
+
+- Choose some problem to solve in `data`
+- Open App.java and write problem name to `problemList` in line `10`
+- Save the change by `ctrl` + `S`
+- Change the `path` that points to your folder
+    ```
+    cd path/
+    ```
+- Run program in terminal by:
+    ```
+    javac App.java
+    java App.java
+    ```
