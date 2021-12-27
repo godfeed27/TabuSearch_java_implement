@@ -6,6 +6,7 @@ The workspace contains five folders, where:
 - `bin`: contains classes after compile
 - `data`: contains data instances
 - `lib`: contains dependencies
+- `optimalResults` contain optimal results
 - `output`: contains output files
 - `src`: contains sources
 
