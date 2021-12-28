@@ -25,6 +25,10 @@ Data FAQ
 http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/TSPFAQ.html
 
 One can download the datasets `.tsp`, `.opt.tsp` from [here](http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/tsp/ALL_tsp.tar.gz) by:
+- Direct to your folder of the project:
+    ```
+    cd path\to\folder
+    ```
 - For Windows:
     - Install [winrar](https://www.win-rar.com/start.html?&L=10) and set path:
         ```
@@ -32,16 +36,16 @@ One can download the datasets `.tsp`, `.opt.tsp` from [here](http://comopt.ifi.u
         ```
     - Run `getData-Win.bat`:
         ```console
-        > getData-Win.bat
+        getData-Win.bat
         ```
 - For Linux/MacOS:
     - Install `curl`:
         ```
-        > sudo apt install curl
+        sudo apt install curl
         ```
     - Run getData-Unix.sh:
         ```
-        > bash getData-Unix.sh
+        bash getData-Unix.sh
         ```
 
 ## Run Program
@@ -57,9 +61,9 @@ One can download the datasets `.tsp`, `.opt.tsp` from [here](http://comopt.ifi.u
 - Choose some problem to solve in `data`
 - Open App.java and write problem name to `problemList` in line `10`
 - Save the change by `ctrl` + `S`
-- Change the `path` that points to your folder
+- Direct to your folder of the project:
     ```
-    cd path/
+    cd path\to\folder
     ```
 - Run program in terminal by:
     ```
